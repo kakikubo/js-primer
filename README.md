@@ -7,3 +7,11 @@
 ## 第1部 基本文法
 
 * [JavaScriptとは](./chapter1)
+
+
+## 参考
+
+Github Actionsでハマる時にいつも躓くのでメモ
+
+* <https://zenn.dev/kenghaya/articles/d7f766e5db6437>
+* <https://zenn.dev/tatsugon/articles/github-actions-permission-error>
