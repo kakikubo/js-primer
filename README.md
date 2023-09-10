@@ -4,6 +4,18 @@
 本家からforkはせず、一旦個別に作成してみる
 各ディレクトリにてサンプルのコードを記載していく事にする。
 
-## 第1部 基本文法
+## 第1章 基本文法
 
 * [JavaScriptとは](./chapter1)
+
+## 第2章 コメント
+
+* [コメント](./chapter2)
+* [参考](https://qiita.com/rana_kualu/items/3ec7a5fdf6a62fd6eecb#-----)
+
+## 参考
+
+Github Actionsでハマる時にいつも躓くのでメモ
+
+* <https://zenn.dev/kenghaya/articles/d7f766e5db6437>
+* <https://zenn.dev/tatsugon/articles/github-actions-permission-error>
