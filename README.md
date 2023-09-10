@@ -6,4 +6,4 @@
 
 ## 第1部 基本文法
 
-### Chapter1 JavaScriptとは
+* [JavaScriptとは](./chapter1)
