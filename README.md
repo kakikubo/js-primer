@@ -13,6 +13,9 @@
 * [コメント](./chapter2)
 * [参考](https://qiita.com/rana_kualu/items/3ec7a5fdf6a62fd6eecb#-----)
 
+## 第3章 変数と宣言
+
+* [変数と宣言](./chapter3)
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
