@@ -16,6 +16,14 @@
 ## 第3章 変数と宣言
 
 * [変数と宣言](./chapter3)
+
+## 第4章 値の評価と表示
+
+* [値の評価と表示](./chapter4)
+
+ウェブ版の方が良さそうなので、この章はwebのリンクをつけておく事にする
+<https://jsprimer.net/basic/read-eval-print/>
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
