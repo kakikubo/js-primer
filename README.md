@@ -24,6 +24,10 @@
 ウェブ版の方が良さそうなので、この章はwebのリンクをつけておく事にする
 <https://jsprimer.net/basic/read-eval-print/>
 
+## 第５章 データ型とリテラル
+
+* [データ型とリテラル](./chapter5)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
