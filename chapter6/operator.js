@@ -222,3 +222,63 @@ function addPrefix(text, prefix) {
 }
 console.log(addPrefix("文字列")); // => "デフォルト:文字列"
 console.log(addPrefix("文字列", "カスタム")); // => "カスタム文字列"
+// if文で書くと宣言と代入を分けて書く必要がある為、constが使えない
+function addPrefix2(text, prefix) {
+  let pre = "デフォルト:";
+  if (typeof prefix === "string") {
+    pre = prefix;
+  }
+  return pre + text;
+}
+console.log(addPrefix2("文字列")); // => "デフォルト:文字列"
+console.log(addPrefix2("文字列", "カスタム")); // => "カスタム文字列"
+
+/*
+論理演算子
+*/
+// AND演算子(&&)
+const xx = true;
+const yy = false;
+console.log(xx && yy); // => true
+console.log(yy && xx); // => false xxは評価されない
+const value2 = "str";
+if (typeof value2 === "string" && value === "str") {
+  console.log(`${value} is string value`);
+}
+// if文でネストで書いた場合と結果は同じになる
+if (typeof value2 === "string") {
+  if (value2 === "str") {
+    console.log(`${value} is string value`);
+  }
+}
+// OR演算子(||)
+const xxx = true;
+const yyy = false;
+console.log(xxx || yyy); // => true
+console.log(yyy || xxx); // => true yyyはfalseなのでxxxが評価される
+const value3 = 1;
+if (value3 === 0 || value3 === 1) {
+  console.log("value は 0 または 1 です");
+}
+// NOT演算子(!)
+console.log(!false); // => true
+console.log(!true); // => false
+const str0 = "";
+// 空文字列はfalse→!で否定してtrue→!!でさらに否定してfalse
+console.log(!!str0); // 文字列を真偽値に変換 => false
+// もっと自然な方法に置き換える事を検討する
+console.log(str0.length > 0); // => false
+// グループ演算子 ( )
+const A = 1;
+const B = 2;
+const C = 3;
+console.log(A + B * C); // => 7
+console.log((A + B) * C); // => 9
+// カンマ演算子(,)
+const aa = 1,
+  bb = 2,
+  cc = aa + bb;
+console.log(cc); // => 3
+
+// indirect callというものもある
+// <https://2ality.com/2014/01/eval.html>
