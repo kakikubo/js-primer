@@ -10,23 +10,35 @@
 
 ## 第2章 コメント
 
-* [コメント](./chapter2)
+* [コメント](./chapter2/comment.js)
 * [参考](https://qiita.com/rana_kualu/items/3ec7a5fdf6a62fd6eecb#-----)
 
 ## 第3章 変数と宣言
 
-* [変数と宣言](./chapter3)
+* [変数と宣言](./chapter3/variable.js)
 
 ## 第4章 値の評価と表示
 
-* [値の評価と表示](./chapter4)
+* [値の評価と表示](./chapter4/example/index.html)
 
 ウェブ版の方が良さそうなので、この章はwebのリンクをつけておく事にする
 <https://jsprimer.net/basic/read-eval-print/>
 
 ## 第５章 データ型とリテラル
 
-* [データ型とリテラル](./chapter5)
+* [データ型とリテラル](./chapter5/index.html)
+
+## 第６章 演算子
+
+* [演算子](./chapter6/index.html)
+
+## 第７章 暗黙的な型変換
+
+* [暗黙的な型変換](./chapter7/index.html)
+
+## 第8章 関数と宣言
+
+* [関数と宣言](./chapter8/index.html)
 
 ## 参考
 
