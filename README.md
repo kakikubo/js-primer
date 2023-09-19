@@ -40,6 +40,10 @@
 
 * [関数と宣言](./chapter8/index.html)
 
+## 第9章 関数と宣言
+
+* [文と式](./chapter9/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
