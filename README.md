@@ -56,6 +56,9 @@
 
 * [オブジェクト](./chapter12/index.html)
 
+## 第13章 プロトタイプオブジェクト
+
+* [オブジェクト](./chapter12/index.html)
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
