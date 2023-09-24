@@ -62,7 +62,7 @@
 
 ## 第14章 配列
 
-* [配列](./chapter13/index.html)
+* [配列](./chapter14/index.html)
 
 ## 参考
 
