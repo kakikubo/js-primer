@@ -58,7 +58,12 @@
 
 ## 第13章 プロトタイプオブジェクト
 
-* [オブジェクト](./chapter12/index.html)
+* [オブジェクト](./chapter13/index.html)
+
+## 第14章 配列
+
+* [配列](./chapter14/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
