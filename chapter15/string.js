@@ -170,3 +170,45 @@ console.log("ABC" > "ABD"); // => false
   const queryString = url.slice(indexOfQuery);
   console.log(queryString); // => ?param=1
 }
+
+// 文字列の検索(マッチした箇所のインデックスを取得)
+{
+  // 検索対象となる文字列
+  const str = "にわにはにわにわとりがいる";
+  // indexOfは先頭から検索しインデックスを返す - "**にわ**にはにわにわとりがいる"
+  // "にわ"の先頭のインデックスを返すため 0 が返る
+  console.log(str.indexOf("にわ")); // => 0
+
+  // lastIndexOfは末尾から検索しインデックスを返す - "にわにはにわ**にわ**とりがいる
+  console.log(str.lastIndexOf("にわ")); // => 6
+
+  // 指定した文字列が見つからない場合は -1 が返る
+  console.log(str.indexOf("未知のキーワード")); // => -1
+}
+// 文字列の検索(文字列にマッチした文字列の取得)
+{
+  const str = "JavaScript";
+  const searchWord = "Script";
+  const index = str.indexOf(searchWord);
+  if (index !== -1) {
+    // 見つかった場合は該当文字列を出力する
+    console.log(`${searchWord}が見つかりました`);
+  } else {
+    console.log(`${searchWord}は見つかりませんでした`);
+  }
+}
+// 真偽値の取得 (ES2015)
+{
+  const str = "にわにはにわにわとりがいる";
+  // startWith - 検索文字列が先頭ならtrue
+  console.log(str.startsWith("にわ")); // => true
+  console.log(str.startsWith("いる")); // => false
+
+  // endsWith - 検索文字列が末尾ならtrue
+  console.log(str.endsWith("にわ")); // => false
+  console.log(str.endsWith("いる")); // => true
+
+  // includes - 検索文字列が含まれているならtrue
+  console.log(str.includes("にわ")); // => true
+  console.log(str.includes("いる")); // => true
+}
