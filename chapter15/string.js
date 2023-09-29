@@ -212,3 +212,21 @@ console.log("ABC" > "ABD"); // => false
   console.log(str.includes("にわ")); // => true
   console.log(str.includes("いる")); // => true
 }
+
+// 正規表現オブジェクト
+{
+  // 正規表現リテラルで正規表現オブジェクトを作成
+  const patternA = /a+/g;
+  // `RegExp`コンストラクタで正規表現オブジェクトを作成
+  const patternB = new RegExp("a+", "g");
+}
+{
+  // 3つの連続するスペースなどにマッチする正規表現
+  const pattern = /\s{3}/; // 3つの連続するスペースにマッチする
+
+  // 動的に正規表現を構築する場合はRegExpコンストラクタを使う
+  const spaceCount = 3;
+  // `/\s{3}/`の正規表現を文字列から作成する
+  // "\"がエスケープ文字であるため、"\"自身を文字列として書くには"\\"のように2つ書く
+  const patternS = new RegExp(`\\s{${spaceCount}}`);
+}
