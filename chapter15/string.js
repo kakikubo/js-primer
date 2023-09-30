@@ -230,3 +230,124 @@ console.log("ABC" > "ABD"); // => false
   // "\"がエスケープ文字であるため、"\"自身を文字列として書くには"\\"のように2つ書く
   const patternS = new RegExp(`\\s{${spaceCount}}`);
 }
+
+/*
+ * 正規表現による検索
+ */
+// 正規表現によるインデックスの取得
+{
+  const str = "ABC123EFG";
+  const searchPattern = /\d{3}/;
+  console.log(str.search(searchPattern)); // => 3
+}
+{
+  // searchでは「マッチした文字列の長さ」がわからない
+  const str = "abc123def";
+  // 連続した数字にマッチする正規表現
+  const searchPattern = /\d+/;
+  const index = str.search(searchPattern);
+  // `index`だけではマッチした文字列の長さがわからない
+  // str.slice(index, index + マッチした文字列の長さ); // マッチした文字列は取得できない
+}
+{
+  // matchメソッドを使う。マッチする文字列がない場合はnullが返る
+  console.log("文字列".match(/マッチしないパターン/)); // => null
+}
+{
+  const str = "ABC あいう DE えお";
+  // 連続した非アルファベットにマッチする正規表現
+  const pattern = /[^A-Za-z]+/;
+  console.log(str.match(pattern)); // => [" あいう DE えお"]
+}
+{
+  const str = "ABC あいう DE えお";
+  // 連続した非アルファベットにマッチする正規表現
+  const pattern = /[^A-Za-z]+/;
+  // gフラグを付与するとマッチした文字列全てを含む配列が返る
+  console.log(str.match(pattern)); // => [" あいう ", " えお"]
+}
+{
+  const str = "ABC あいう DE えお";
+  // 連続した非アルファベットにマッチする正規表現
+  const pattern = /[^A-Za-z]+/;
+  // gフラグを付与するとマッチした文字列全てを含む配列が返る
+  console.log(str.match(pattern)); // => [" あいう ", " えお"]
+}
+{
+  const str = "ABC あいう DE えお";
+  // 連続した非アルファベットにマッチする正規表現
+  const pattern = /[^A-Za-z]+/g;
+  // gフラグを付与するとマッチした文字列全てを含む配列が返る
+  console.log(str.match(pattern)); // => [" あいう ", " えお"]
+}
+{
+  const str = "ABC あいう DE えお";
+  const alphabetPattern = /[a-zA-Z]+/;
+  // gフラグなしでは、最初の結果のみを含んだ特殊な配列を返す
+  const results = str.match(alphabetPattern);
+  console.log(results.length); // => 1
+  // マッチした文字列はインデックスでアクセスできる
+  console.log(results[0]); // => "ABC
+  // マッチした文字列の先頭のインデックス
+  console.log(results.index); // => 0
+  // 検索対象となった文字列全体
+  console.log(results.input); // => "ABC あいう DE えお"
+}
+{
+  // gフラグありでは、マッチした文字列全てを含む配列が返る
+  const str = "ABC あいう DE えお";
+  const alphabetPattern = /[a-zA-Z]+/g;
+  const resultsWithG = str.match(alphabetPattern);
+  console.log(resultsWithG.length); // => 2
+  console.log(resultsWithG[0]); // => "ABC"
+  console.log(resultsWithG[1]); // => "DE"
+  console.log(resultsWithG.index); // => undefined
+  console.log(resultsWithG.input); // => undefined
+  /*
+   * マッチメソッドのまとめ
+   * - マッチしない場合は、nullを返す
+   * - マッチした場合は、マッチした文字列を含んだ特殊な配列を返す
+   * - 正規表現のgフラグがある場合は、マッチしたすべての結果を含んだただの配列を返す
+   */
+}
+{
+  // matchAll(ES2020) gフラグが必須となる
+  const str = "ABC あいう DE えお";
+  const alphabetPattern = /[a-zA-Z]+/g;
+  // matchAllはIteratorを返す
+  const matchesIterator = str.matchAll(alphabetPattern);
+  for (const match of matchesIterator) {
+    // マッチした要素ごとの情報を含んでいる
+    console.log(
+      `match: "${match[0]}", index: ${match.index}, input: "${match.input}"`
+    );
+  }
+  // match: "ABC", index: 0, input: "ABC あいう DE えお"
+  // match: "DE", index: 8, input: "ABC あいう DE えお"
+}
+{
+  // matchやmatchAllをつかったキャプチャ
+  // "ECMAScript (数字+)"にマッチするが、ほしい文字列は数字の部分のみ
+  const pattern = /ECMAScript (\d+)/;
+  // 返り値は0番目がマッチした全体、1番目がキャプチャの1番目というように対応している
+  // [マッチした全部の文字列, キャプチャの1番目, キャプチャの2番目, ...]
+  const [all, capture1] = "ECMAScript 6".match(pattern);
+  console.log(all); // => ECMAScript 6
+  console.log(capture1); // => 6
+}
+{
+  // "ES(数字+)"にマッチするが、ほしい文字列は数字の部分のみ
+  const pattern = /ES(\d+)/g;
+  // iteratorを返す
+  const matchesIterator = "ES2015,ES2016,ES2017".matchAll(pattern);
+  for (const match of matchesIterator) {
+    // マッチした要素ごとの情報を含んでいる
+    // 0番目はマッチした文字列全体、1番目がキャプチャの1番目である数字
+    console.log(
+      `match: ${match[0]}, capture1: ${match[1]}, index: ${match.index}, input: ${match.input}`
+    );
+  }
+  // match: ES2015, capture1: 2015, index: 0, input: ES2015,ES2016,ES2017
+  // match: ES2016, capture1: 2016, index: 7, input: ES2015,ES2016,ES2017
+  // match: ES2017, capture1: 2017, index: 14, input: ES2015,ES2016,ES2017
+}
