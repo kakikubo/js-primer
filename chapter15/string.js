@@ -1,3 +1,4 @@
+"use strict";
 {
   const double = "文字列";
   console.log(double);
@@ -350,4 +351,130 @@ console.log("ABC" > "ABD"); // => false
   // match: ES2015, capture1: 2015, index: 0, input: ES2015,ES2016,ES2017
   // match: ES2016, capture1: 2016, index: 7, input: ES2015,ES2016,ES2017
   // match: ES2017, capture1: 2017, index: 14, input: ES2015,ES2016,ES2017
+}
+
+// [コラム] RegExp.prototype.execでのString.prototype.matchAll
+{
+  const str = "ABC あいう DE えお";
+  const alphabetsPattern = /[a-zA-Z]+/;
+  // gフラグなしでは、最初の結果のみを持つ配列を返す
+  const results = alphabetsPattern.exec(str);
+  console.log(results.length); // => 1
+  console.log(results[0]); // => "ABC"
+  // マッチした文字列の先頭のインデックス
+  console.log(results.index); // => 0
+  // 検索対象となった文字列全体
+  console.log(results.input); // => "ABC あいう DE えお"
+}
+{
+  // 上記のgフラグありのパターン
+  const str = "ABC あいう DE えお";
+  const alphabetsPattern = /[a-zA-Z]+/g;
+  // まだ一度も検索していないので、lastIndexは0となり先頭から検索が開始される
+  console.log(alphabetsPattern.lastIndex); // => 0
+  // gフラグありでも、一回目の結果は同じだが、`lastIndex`プロパティが更新される
+  const result1 = alphabetsPattern.exec(str);
+  console.log(result1[0]); // => "ABC"
+  console.log(alphabetsPattern.lastIndex); // => 3
+  // 2回目の検索が、`lastIndex`の値のインデックスから開始される
+  const result2 = alphabetsPattern.exec(str);
+  console.log(result2[0]); // => "DE"
+  console.log(alphabetsPattern.lastIndex); // => 10
+  // 検索結果が見つからない場合はnullを返し、`lastIndex`プロパティは0にリセットされる
+  const result3 = alphabetsPattern.exec(str);
+  console.log(result3); // => null
+  console.log(alphabetsPattern.lastIndex); // => 0
+}
+{
+  const str = "ABC あいう DE えお";
+  const alphabetsPattern = /[a-zA-Z]+/g;
+  let matches;
+  while ((matches = alphabetsPattern.exec(str))) {
+    // RegExpの`exec`メソッドの返り値は`index`プロパティなどを含む特殊な配列
+    console.log(
+      `match: ${matches[0]}, index: ${matches.index}, lastIndex: ${alphabetsPattern.lastIndex}`
+    );
+  }
+  // 次の順番でコンソールに出力される
+  // match: ABC, index: 0, lastIndex: 3
+  // match: DE, index: 8, lastIndex: 10
+}
+
+// 真偽値の取得 パターンにマッチするかどうかを返す
+{
+  // 検索対象となる文字列
+  const str = "にわにはにわにわとりがいる";
+  // ^ - 検索文字列が先頭ならtrue
+  console.log(/^にわ/.test(str)); // => true
+  console.log(/^いる/.test(str)); // => false
+  // $ - 検索文字列が末尾ならtrue
+  console.log(/にわ$/.test(str)); // => false
+  console.log(/いる$/.test(str)); // => true
+  // 検索文字列が含まれるならtrue
+  console.log(/にわ/.test(str)); // => true
+  console.log(/いる/.test(str)); // => true
+}
+
+// 正規表現だと分かりづらいけど、Stringメソッドで書くとわかりやすい例
+{
+  const str = "/正規表現のような文字列/";
+  // 正規表現で`/`からはじまり`/`で終わる文字列のパターン
+  const regExpLikePattern = /^\/.*\/$/;
+  // RegExpの`test`メソッドでパターンにマッチするかを判定
+  console.log(regExpLikePattern.test(str)); // => true
+  // Stringメソッドで、`/`からはじまり`/`で終わる文字列かを判定する関数
+  const isRegExpLikeString = (str) => {
+    return str.startsWith("/") && str.endsWith("/");
+  };
+  console.log(isRegExpLikeString(str)); // => true
+}
+
+// 文字列に対して delete演算子は使えない
+{
+  const str = "文字列";
+  // delete str[0]; => Uncaught TypeError: Cannot delete property '0' of string '文字列'
+  const newStr = str.replace("文字", ""); // replaceを使うことで文字列から文字を削除した新しい文字列を生成
+  console.log(newStr); // => 列
+}
+// replaceメソッドは正規表現も指定できる
+{
+  // 検索対象となる文字列
+  const str = "にわにはにわにわとりがいる";
+  // 文字列を指定した場合は、最初に一致したものだけが置換される
+  console.log(str.replace("にわ", "niwa")); // => "niwaにはにわにわとりがいる"
+  // `g`フラグなし正規表現の場合は、最初に一致したものだけが置換される
+  console.log(str.replace(/にわ/, "niwa")); // => "niwaにはにわにわとりがいる"
+  // `g`フラグあり正規表現の場合は、繰り返し置換を行う
+  console.log(str.replace(/にわ/g, "niwa")); // => "niwaにはniwaniwaとりがいる"
+}
+{
+  // replaceAll(ES2021)
+  // 検索対象となる文字列
+  const str = "???";
+  // replaceメソッドに文字列を指定した場合は、最初に一致したものだけが置換される
+  console.log(str.replace("?", "!")); // => "!??"
+  // replaceAllメソッドに文字列を指定した場合は、一致したものがすべて置換される
+  console.log(str.replaceAll("?", "!")); // => "!!!"
+  // replaceメソッドの場合は、正規表現の特殊文字はエスケープが必要となる
+  console.log(str.replace(/\?/g, "!")); // => "!!!"
+  // replaceAllメソッドにも正規表現を渡せるが、この場合はエスケープが必要となるためreplaceと同じ
+  console.log(str.replaceAll(/\?/g, "!")); // => "!!!"
+}
+
+{
+  function toDateJa(dateString) {
+    // パターンにマッチしたときのみ、コールバック関数で置換処理が行われる
+    return dateString.replace(
+      /(\d{4})-(\d{2})-(\d{2})/g,
+      (all, year, month, day) => {
+        // `all`には、マッチした文字列全体が入っているが今回は利用しない
+        // `all`が次の返す値で置換されるイメージ
+        return `${year}年${month}月${day}日`;
+      }
+    );
+  }
+  // マッチしない文字列の場合は、そのままの文字列が返る
+  console.log(toDateJa("本日ハ晴天ナリ")); // => "本日ハ晴天ナリ"
+  // マッチした場合は置換した結果を返す
+  console.log(toDateJa("今日は2017-03-01です")); // => "今日は2017年03月01日です"
 }
