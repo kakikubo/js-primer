@@ -68,6 +68,10 @@
 
 * [文字列](./chapter15/index.html)
 
+## 第16章 文字列とUnicode
+
+* [文字列とUnicode](./chapter16/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
