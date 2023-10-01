@@ -64,6 +64,10 @@
 
 * [配列](./chapter14/index.html)
 
+## 第15章 文字列
+
+* [文字列](./chapter15/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
