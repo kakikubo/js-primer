@@ -478,3 +478,80 @@ console.log("ABC" > "ABD"); // => false
   // マッチした場合は置換した結果を返す
   console.log(toDateJa("今日は2017-03-01です")); // => "今日は2017年03月01日です"
 }
+
+{
+  // ベースURLとパスが結合した文字列を返す
+  function baseJoin(baseURL, pathname) {
+    // 末尾に / がある場合は / を削除してから結合する
+    const stripSlashBaseURL = baseURL.replace(/\/$/, "");
+    const stripSlashPathname = pathname.replace(/^\//, "");
+    return `${stripSlashBaseURL}/${stripSlashPathname}`;
+  }
+  // baseURLとpathnameにあるリソースを取得する
+  function getResource(baseURL, pathname) {
+    const url = baseJoin(baseURL, pathname);
+    // baseURLの末尾に/があってもなくても同じ結果となる
+    console.log(`"${url}"からリソースを取得しました`);
+  }
+  const baseURL = "https://example.com/resources";
+  const pathname = "example.js";
+  getResource(baseURL, pathname); // => "https://example.com/resources/example.js"からリソースを取得しました
+}
+
+// タグ付きテンプレート関数 (ES2015)
+{
+  // 通常の関数として呼び出す場合
+  function tag(str) {
+    // 引数strにはただの文字列が渡ってくる
+    console.log(str);
+  }
+  tag(`template ${0} literal ${1}`); // => "template 0 literal 1"
+}
+{
+  // 関数テンプレートを呼び出す場合
+  function tag(strings, ...values) {
+    // stringsは文字列のパーツが${}で区切られた配列となる
+    console.log(strings); // => ["template ", " literal ", ""]
+    // valuesには${}の評価値が順番に入る
+    console.log(values); // => [0, 1]
+  }
+  console.log("test");
+  // ()をつけずにテンプレートを呼び出す
+  tag`template ${0} literal ${1}`; //=> ["template ", " literal ", ""] [0, 1]
+}
+{
+  console.log("stringRaw");
+  // テンプレートを順番どおりに結合した文字列を返すタグ関数
+  function stringRaw(strings, ...values) {
+    // resultの初期値はstrings[0]の値となる
+    return strings.reduce((result, str, i) => {
+      console.log(`result=${result}, str=${str}, i=${i} values=${values}`);
+      console.log([result, values[i - 1], str]);
+      // それぞれループで次のような出力となる
+      // 1度目: ["template ", 0, " literarl "]
+      // 2度目: ["template 0 literal ", 1, ""]
+      return result + values[i - 1] + str;
+    });
+  }
+  // 関数`テンプレートリテラル`という形で呼び出す
+  console.log(stringRaw`template ${0} literal ${1}`);
+  // => "template 0 literal 1"
+  console.log(String.raw`template ${0} literal ${1}`); // String.raw (ES2015)
+}
+
+{
+  // 変数URLをエスケープするタグ関数
+  function escapeURL(strings, ...values) {
+    return strings.reduce((result, str, i) => {
+      const value = values[i - 1];
+      console.log(values);
+      console.log(encodeURIComponent(value));
+      return result + encodeURIComponent(value) + str;
+    });
+  }
+
+  const input = "A&B";
+  // escapeURLタグ関数を使ったタグ付きテンプレート
+  const escapedURL = escapeURL`https://example.com/search?q=${input}&sort=desc`;
+  console.log(escapedURL);
+}
