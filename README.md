@@ -76,6 +76,10 @@
 
 * [ラッパーオブジェクト](./chapter17/index.html)
 
+## 第18章 関数とスコープ
+
+* [関数とスコープ](./chapter18/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
