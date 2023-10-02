@@ -72,6 +72,10 @@
 
 * [文字列とUnicode](./chapter16/index.html)
 
+## 第17章 ラッパーオブジェクト
+
+* [ラッパーオブジェクト](./chapter17/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
