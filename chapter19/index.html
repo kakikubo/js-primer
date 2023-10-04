@@ -7,13 +7,13 @@
   <body>
     <script>
       // 実行コンテキストは"Script"
-      console.log(this); // => Window (Node.jsではglobal)
+      // console.log(this); // => Window (Node.jsではglobal)
     </script>
     <script type="module">
       // 実行コンテキストは"Module"
-      console.log(this); // => undefined
+      // console.log(this); // => undefined
       // ブラウザでは`window`オブジェクト、Node.jsでは`global`オブジェクトを参照する
-      console.log(globalThis);
+      // console.log(globalThis);
     </script>
   </body>
 </html>
