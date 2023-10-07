@@ -224,3 +224,29 @@
   console.log(arrayLike.items.join(",")); // => "1,2,,,"
 }
 
+// 静的メソッド
+{
+  class ArrayWrapper {
+    constructor(array = []) {
+      this.array = array;
+    }
+
+    // rest parametersとして要素を受け付ける
+    static of(...items) {
+      // return new ArrayWrapper(items);
+      // thisはArrayWrapperを参照する。よって以下でも同じ
+      return new this(items);
+    }
+
+    get length() {
+      return this.array.length;
+    }
+  }
+
+  // 配列を引数として渡している
+  const arrayWrapperA = new ArrayWrapper([1, 2, 3]);
+  // 要素を引数として渡している
+  const arrayWrapperB = ArrayWrapper.of(1, 2, 3);
+  console.log(arrayWrapperA);
+  console.log(arrayWrapperB);
+}
