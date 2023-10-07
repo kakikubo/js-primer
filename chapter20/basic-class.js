@@ -250,3 +250,58 @@
   console.log(arrayWrapperA);
   console.log(arrayWrapperB);
 }
+
+// 2種類のインスタンスメソッドの定義
+{
+  class ConflictClass {
+    constructor() {
+      // インスタンスオブジェクトにmethodを定義
+      this.method = () => {
+        console.log("インスタンスオブジェクトのメソッド");
+      };
+    }
+
+    // クラスのプロトタイプメソッドとしてmethodを定義
+    method() {
+      console.log("プロトタイプのメソッド");
+    }
+  }
+  const conflict = new ConflictClass();
+  conflict.method(); // => "インスタンスオブジェクトのメソッド"
+  // インスタンスのmethodプロパティを削除
+  delete conflict.method;
+  conflict.method(); // => "プロトタイプのメソッド"
+}
+
+{
+  function fn() {}
+  // prototypeプロパティにプロトタイプオブジェクトが存在する
+  console.log(typeof fn.prototype === "object"); // => true
+  class MyClass {}
+  // prototypeプロパティにプロトタイプオブジェクトが存在する
+  console.log(typeof MyClass.prototype === "object"); // => true
+}
+// プロトタイプオブジェクト
+{
+  class MyClass {
+    method() {}
+  }
+  // methodはMyClassのプロトタイプオブジェクトのプロパティとして定義されている
+  console.log(typeof MyClass.prototype.method === "function"); // => true
+  // クラス#constructorはクラス自身を参照する
+  console.log(MyClass.prototype.constructor === MyClass); // => true
+}
+// プロトタイプチェーン
+{
+  class MyClass {
+    method() {
+      console.log("プロトタイプのメソッド");
+    }
+  }
+  const instance = new MyClass();
+  // インスタンスにはmethodプロパティがないため、プロトタイプオブジェクトのmethodが参照される
+  instance.method(); // => "プロトタイプのメソッド"
+  // instanceの[[Prototype]]内部プロパティはMyClass.prototypeと一致する
+  const MyClassPrototype = Object.getPrototypeOf(instance);
+  console.log(MyClassPrototype === MyClass.prototype); // => true
+}
