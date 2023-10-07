@@ -174,3 +174,53 @@
   // "getter"とコンソールに表示される
   console.log(numberWrapper.value); // => 42
 }
+
+// Array#lengthをアクセッサプロパティで再現する
+{
+  // たとえばこういう挙動
+  const array = [1, 2, 3, 4, 5];
+  // 要素数を減らすと、インデックス以降の要素が削除される
+  array.length = 2;
+  console.log(array.join(",")); // => "1,2"
+  // 要素数だけを増やしても、配列の中身は空要素が増えるだけ
+  array.length = 5;
+  console.log(array.join(",")); // => "1,2, , , "
+}
+{
+  // 配列のようなlengthを持つクラス
+  class ArrayLike {
+    constructor(items = []) {
+      this._items = items;
+    }
+
+    get items() {
+      return this._items;
+    }
+
+    get length() {
+      return this._items.length;
+    }
+
+    set length(newLength) {
+      const currentItemLength = this.items.length;
+      // 現在要素数より小さなnewLengthが指定された場合、指定した要素数となるように末尾を削除する
+      if (newLength < currentItemLength) {
+        this._items = this.items.slice(0, newLength);
+      } else if (newLength > currentItemLength) {
+        // 現在要素数より大きなnewLengthが指定された場合、指定した要素数となるように末尾に空要素を追加する
+        this._items = this.items.concat(
+          new Array(newLength - currentItemLength)
+        );
+      }
+    }
+  }
+
+  const arrayLike = new ArrayLike([1, 2, 3, 4, 5]);
+  // 要素数を減らすと、インデックス以降の要素が削除される
+  arrayLike.length = 2;
+  console.log(arrayLike.items.join(",")); // => "1,2"
+  // 要素数を増やすと末尾に空要素が追加される
+  arrayLike.length = 5;
+  console.log(arrayLike.items.join(",")); // => "1,2,,,"
+}
+
