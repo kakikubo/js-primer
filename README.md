@@ -80,6 +80,14 @@
 
 * [関数とスコープ](./chapter18/index.html)
 
+## 第19章 関数とthis
+
+* [関数とthis](./chapter19/index.html)
+
+## 第20章 関数とthis
+
+* [クラス](./chapter20/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
