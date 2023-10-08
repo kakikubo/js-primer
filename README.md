@@ -88,6 +88,10 @@
 
 * [クラス](./chapter20/index.html)
 
+## 第21章 例外処理
+
+* [例外処理](./chapter21/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
