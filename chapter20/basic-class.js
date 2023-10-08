@@ -305,3 +305,138 @@
   const MyClassPrototype = Object.getPrototypeOf(instance);
   console.log(MyClassPrototype === MyClass.prototype); // => true
 }
+
+// 継承
+{
+  class Parent {
+    constructor(...args) {
+      console.log("Parentコンストラクタの処理", ...args);
+    }
+  }
+  // Parentを継承したChildクラスの定義
+  class Child extends Parent {
+    constructor(...args) {
+      // Parentのコンストラクタを呼び出す
+      super(...args);
+      console.log("Childコンストラクタの処理", ...args);
+    }
+  }
+  const child = new Child("引数1", "引数2");
+  // Parentコンストラクタの処理 引数1 引数2
+  // Childコンストラクタの処理 引数1 引数2
+}
+{
+  class Parent {
+    constructor() {
+      this.name = "Parent";
+    }
+  }
+  class Child extends Parent {
+    constructor() {
+      //  子クラスではsuper()をthisに触る前に呼び出さなければならない
+      super();
+      // 子クラスのコンストラクタ処理
+      // 親クラスで書き込まれたnameは上書きされる
+      this.name = "Child";
+    }
+  }
+  const parent = new Parent();
+  console.log(parent.name); // => 'Parent'
+  const child = new Child();
+  console.log(child.name); // => 'Child'
+}
+
+// プロトタイプ継承
+{
+  class Parent {
+    method() {
+      console.log("Parent#method");
+    }
+  }
+  // Parentを継承したChildを定義
+  class Child extends Parent {
+    // methodの定義はない
+  }
+  // ChildのインスタンスはParentのプロトタイプメソッドを継承している
+  const instance = new Child();
+  instance.method(); // => "Parent#method"
+}
+
+{
+  class Parent {
+    method() {
+      console.log("Parent#method");
+    }
+  }
+  class Child extends Parent {
+    method() {
+      console.log("Child#method");
+      // this.method()だと自分(this)のmethodを呼び出して無限ループする
+      // そのため、明示的にsuper.method()とParent#methodを呼び出す
+      super.method();
+    }
+  }
+  const child = new Child();
+  child.method();
+  // "Child#method"
+  // "Parent#method"
+}
+{
+  class Parent {
+    static method() {
+      console.log("Parent.method");
+    }
+  }
+  class Child extends Parent {
+    static method() {
+      console.log("Child.method");
+      // super.method()はParent.methodを呼び出す
+      super.method();
+    }
+  }
+  Child.method();
+  // コンソールには次のように出力される
+  // "Child.method"
+  // "Parent.method"
+}
+
+// 継承の判定
+{
+  class Parent {}
+  class Child extends Parent {}
+  const parent = new Parent();
+  const child = new Child();
+  // ParentのインスタンスはParentのみを継承したインスタンス
+  console.log(parent instanceof Parent); // => true
+  console.log(parent instanceof Child); // => false
+  // ChildのインスタンスはChildとParentの両方を継承したインスタンス
+  console.log(child instanceof Parent); // => true
+  console.log(child instanceof Child); // => true
+}
+
+// ビルトインオブジェクトの継承
+{
+  class MyArray extends Array {
+    get first() {
+      if (this.length === 0) {
+        return undefined;
+      } else {
+        return this[0];
+      }
+    }
+    get last() {
+      if (this.length === 0) {
+        return undefined;
+      } else {
+        return this[this.length - 1];
+      }
+    }
+  }
+
+  // Array を継承しているのでArray.fromも継承している
+  // Array.fromはIterableなオブジェクトから配列インスタンスを作成する
+  const array = MyArray.from([1, 2, 3, 4, 5]);
+  console.log(array.length); // => 5
+  console.log(array.first); // => 1
+  console.log(array.last); // => 5
+}
