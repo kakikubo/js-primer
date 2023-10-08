@@ -112,3 +112,12 @@
     console.log(error.message); // => "100 is not a string"
   }
 }
+
+// console.errorとスタックトレース
+{
+  function fn() {
+    console.log("メッセージ");
+    console.error("エラーメッセージ"); // ブラウザで見るとスタックトレースが表示されている
+  }
+  fn();
+}
