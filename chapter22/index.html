@@ -4,6 +4,15 @@
     <title>Chapter22</title>
     <script src="./async.js"></script>
   </head>
-  <body></body>
+  <body>
+    <script type="module">
+      // このコードはModuleのトップレベルでのみ動作する(Top-Level Await)
+      console.log("実行開始");
+      const startTime = Date.now();
+      // awaitを使って1秒待つ
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log(`実行終了: ${Date.now() - startTime}ms 経過しました`);
+    </script>
+  </body>
 </html>
 <object data="" type=""></object>
