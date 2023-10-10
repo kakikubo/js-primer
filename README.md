@@ -92,6 +92,10 @@
 
 * [例外処理](./chapter21/index.html)
 
+## 第22章 非同期処理
+
+* [非同期処理](./chapter22/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
