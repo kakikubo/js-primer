@@ -187,3 +187,85 @@
   console.log(map.get(NaN)); // => "value"
   console.log(map.has(NaN)); // => true
 }
+
+// Set
+{
+  const set = new Set();
+  console.log(set.size); // => 0
+}
+{
+  // "value2"が重複するため、片方は無視される
+  const set = new Set(["value1", "value2", "value2"]);
+  // セットのサイズは2になる
+  console.log(set.size); // => 2
+}
+{
+  const set = new Set();
+  // 値の追加
+  set.add("a");
+  console.log(set.size); // => 1
+  // 重複する値は追加されない
+  set.add("a");
+  console.log(set.size); // => 1
+  // 値の存在確認
+  console.log(set.has("a")); // => true
+  console.log(set.has("b")); // => false
+
+  set.add("b");
+  console.log(set.size); // => 2
+  set.delete("a");
+  console.log(set.size); // => 1
+  set.clear();
+  console.log(set.size); // => 0
+}
+{
+  // セットの反復処理
+  const set = new Set(["A", "B"]);
+  const results = [];
+  set.forEach((value) => {
+    results.push(value);
+  });
+  console.log(results); // => ['A', 'B']
+}
+{
+  const set = new Set(["a", "b"]);
+  // keysで列挙(valuesと同じ)
+  const keysResults = [];
+  for (const value of set.keys()) {
+    keysResults.push(value);
+  }
+  console.log(keysResults); // => ['a', 'b']
+
+  // valuesで列挙
+  const valuesResults = [];
+  for (const value of set.values()) {
+    valuesResults.push(value);
+  }
+  console.log(valuesResults); // => ['a', 'b']
+
+  // entriesで列挙
+  const entriesResults = [];
+  for (const entry of set.entries()) {
+    // entryは[値, 値]の配列
+    entriesResults.push(entry);
+  }
+  console.log(entriesResults); // => [['a', 'a'], ['b', 'b']]
+}
+{
+  const set = new Set(["a", "b"]);
+  const results = [];
+  for (const value of set) {
+    results.push(value);
+  }
+  console.log(results); // => ['a', 'b']
+}
+{
+  const set = new WeakSet();
+  // オブジェクトを追加する
+  const key = {};
+  set.add(key);
+  console.log(set.has(key)); // => true
+  // オブジェクトを削除する
+  set.delete(key);
+  console.log(set.has(key)); // => false
+}
