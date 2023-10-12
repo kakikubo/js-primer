@@ -104,6 +104,10 @@
 
 * [JSON](./chapter24/index.html)
 
+## 第25章 Date
+
+* [Date](./chapter25/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
