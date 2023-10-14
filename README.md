@@ -108,6 +108,9 @@
 
 * [Date](./chapter25/index.html)
 
+## 第26章 Math
+
+* [Math](./chapter26/index.html)
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
