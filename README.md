@@ -155,6 +155,10 @@
 
 * [ローカルサーバーのセットアップ](./chapter29/index.html)
 
+### 第30章 ユースケース: Ajax通信
+
+* [Ajax通信](./ajaxapp/index.html)
+
 ### 参考
 
 * [JavaScript Primer](https://jsprimer.net/)
