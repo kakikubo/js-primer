@@ -153,6 +153,8 @@
 
 ### 第29章 アプリケーション開発の準備
 
+* [ローカルサーバーのセットアップ](./chapter29/index.html)
+
 ### 参考
 
 * [JavaScript Primer](https://jsprimer.net/)
