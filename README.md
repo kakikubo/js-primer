@@ -116,7 +116,40 @@
 
 * [ECMAScriptモジュール](./chapter27/index.html)
 
+## 第28章 ECMAScript
+
+バージョン | リリース時期
+--- | ---
+1 | 1997年6月
+2 | 1998年6月
+3 | 1999年12月
+4 | 2000年8月(破棄)
+5 | 2009年12月
+5.1 | 2011年6月
+2015 | 2015年6月
+2016 | 2016年6月
+… | 毎年リリース
+
+* [ECMAScriptの事実上の最新の仕様](https://github.com/tc39/tc39.github.io)
+
+新しい機能を試す際につかえるもの
+
+* Transpiler
+  * Babel
+  * TypeScript
+* Polyfill
+  * core-js
+    * regenerator-runtime
+  * polyfill.io
+  
+言語機能そのものを調べる
+
+* [MDN Web Docs](https://developer.mozilla.org/ja/docs/Web/JavaScript)
+
 ## 参考
+
+* [JavaScript Primer](https://jsprimer.net/)
+* [現代の JavaScript チュートリアル](https://ja.javascript.info/)
 
 Github Actionsでハマる時にいつも躓くのでメモ
 
