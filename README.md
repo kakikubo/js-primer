@@ -111,6 +111,11 @@
 ## 第26章 Math
 
 * [Math](./chapter26/index.html)
+
+## 第27章 ECMAScriptモジュール(ES2015)
+
+* [ECMAScriptモジュール](./chapter27/index.html)
+
 ## 参考
 
 Github Actionsでハマる時にいつも躓くのでメモ
