@@ -1,9 +1,15 @@
 console.log("index.js: loaded!");
 function main() {
-  fetchUserInfo("js-primer-example").catch((error) => {
-    // Promiseチェーンの中で発生したエラーを受け取る
-    console.error(`エラーが発生しました (${error})`);
-  });
+  fetchUserInfo("js-primer-example")
+    // ここではJSONオブジェクトで解決されるPromise
+    .then((userInfo) => createView(userInfo))
+    // ここではHTML文字列で解決されるPromise
+    .then((view) => displayView(view))
+    // Promiseチェーンでエラーがあった場合はキャッチされる
+    .catch((error) => {
+      // Promiseチェーンの中で発生したエラーを受け取る
+      console.error(`エラーが発生しました (${error})`);
+    });
 }
 
 function fetchUserInfo(userId) {
@@ -14,15 +20,12 @@ function fetchUserInfo(userId) {
       if (!response.ok) {
         console.error("エラーレスポンス", response);
         // エラーレスポンスからRejectedなPromiseを作成して返す
-        return Promise.reject(new Error(`${response.status}: ${response.statusText}`));
+        return Promise.reject(
+          new Error(`${response.status}: ${response.statusText}`)
+        );
       } else {
-        return response.json().then((userInfo) => {
-          console.log(userInfo);
-          // HTMLの組み立て
-          const view = createView(userInfo);
-          // HTMLの挿入
-          displayView(view);
-        });
+        // JSONオブジェクトで解決されるPromiseを返す
+        return response.json();
       }
     })
     .catch((error) => {
