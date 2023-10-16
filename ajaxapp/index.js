@@ -1,7 +1,8 @@
 console.log("index.js: loaded!");
 async function main() {
   try {
-    const userInfo = await fetchUserInfo("js-primer-example");
+    const userId = getUserId();
+    const userInfo = await fetchUserInfo(userId);
     const view = createView(userInfo);
     displayView(view);
   } catch (error) {
@@ -10,24 +11,26 @@ async function main() {
 }
 
 function fetchUserInfo(userId) {
-  fetch(`https://api.github.com/users/${encodeURIComponent(userId)}`)
-    .then((response) => {
-      console.log(response.status);
-      // エラーレスポンスが返されたことを検知する
-      if (!response.ok) {
-        console.error("エラーレスポンス", response);
-        // エラーレスポンスからRejectedなPromiseを作成して返す
-        return Promise.reject(
-          new Error(`${response.status}: ${response.statusText}`)
-        );
-      } else {
-        // JSONオブジェクトで解決されるPromiseを返す
-        return response.json();
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  return fetch(
+    `https://api.github.com/users/${encodeURIComponent(userId)}`
+  ).then((response) => {
+    console.log(response.status);
+    // エラーレスポンスが返されたことを検知する
+    if (!response.ok) {
+      console.error("エラーレスポンス", response);
+      // エラーレスポンスからRejectedなPromiseを作成して返す
+      return Promise.reject(
+        new Error(`${response.status}: ${response.statusText}`)
+      );
+    } else {
+      // JSONオブジェクトで解決されるPromiseを返す
+      return response.json();
+    }
+  });
+}
+
+function getUserId() {
+  return document.getElementById("userId").value;
 }
 
 function createView(userInfo) {
