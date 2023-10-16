@@ -1,15 +1,12 @@
 console.log("index.js: loaded!");
-function main() {
-  fetchUserInfo("js-primer-example")
-    // ここではJSONオブジェクトで解決されるPromise
-    .then((userInfo) => createView(userInfo))
-    // ここではHTML文字列で解決されるPromise
-    .then((view) => displayView(view))
-    // Promiseチェーンでエラーがあった場合はキャッチされる
-    .catch((error) => {
-      // Promiseチェーンの中で発生したエラーを受け取る
-      console.error(`エラーが発生しました (${error})`);
-    });
+async function main() {
+  try {
+    const userInfo = await fetchUserInfo("js-primer-example");
+    const view = createView(userInfo);
+    displayView(view);
+  } catch (error) {
+    console.error(`エラーが発生しました (${error})`);
+  }
 }
 
 function fetchUserInfo(userId) {
