@@ -3,8 +3,8 @@ import { program } from "commander";
 
 // fs/promisesモジュールをfsオブジェクトとしてインポートする
 import * as fs from "node:fs/promises";
-// markedモジュールからmarkedオブジェクトをインポートする
-import { marked } from "marked";
+// md2htmlモジュールからmd2html関数をインポートする
+import { md2html } from "./md2html.js";
 
 // gfmオプションを定義する
 program.option("--gfm", "GFMを有効にする");
@@ -27,9 +27,7 @@ fs.readFile(filePath, { encoding: "utf8" })
   .then((file) => {
     // MarkdownファイルをHTML文字列に変換する
     // gfmオプションを無効にする
-    const html = marked(file, {
-      gfm: cliOptions.gfm,
-    });
+    const html = md2html(file, cliOptions);
     console.log(html);
   })
   .catch((err) => {
