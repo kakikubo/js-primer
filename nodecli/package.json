@@ -13,5 +13,8 @@
     "commander": "^9.0.0",
     "marked": "4.0"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  }
 }
