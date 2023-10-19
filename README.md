@@ -159,6 +159,10 @@
 
 * [Ajax通信](./ajaxapp/index.html)
 
+### 第31章 ユースケース: Node.jsでCLIアプリケーション
+
+* [Node.jsでHello World](./nodecli/)
+
 ### 参考
 
 * [JavaScript Primer](https://jsprimer.net/)
