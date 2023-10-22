@@ -1,7 +1,8 @@
 console.log("App.js: loaded");
 import { TodoListModel } from "./model/TodoListModel.js";
 import { TodoItemModel } from "./model/TodoItemModel.js";
-import { element, render } from "./view/html-util.js";
+import { TodoListView } from "./view/TodoListView.js";
+import { render } from "./view/html-util.js";
 
 export class App {
   constructor() {
@@ -16,34 +17,24 @@ export class App {
     const todoItemCountElement = document.querySelector("#js-todo-count");
     // 2. TodoListModelの状態が更新されたら表示を更新する
     this.todoListModel.onChange(() => {
-      // TodoリストをまとめるList要素
-      const todoListElement = element`<ul />`;
       // それぞれのTodoItem要素をtodoListElement以下へ追加する
       const todoItems = this.todoListModel.getTodoItems();
-      todoItems.forEach((item) => {
-        // 削除ボタン(x)をそれぞれ追加する
-        // 完了済みなら checked属性をつけ、未完了なら checked属性を外す
-        // input要素にはcheckboxクラスをつける
-        const todoItemElement = item.completed
-          ? element`<li><input type="checkbox" class="checkbox" checked><s>${item.title}</s><button class="delete">x</button></input></li>`
-          : element`<li><input type="checkbox" class="checkbox">${item.title}<button class="delete">x</button></input></li>`;
-        // チェックボックスがトグルしたときのイベントにリスナー関数を登録する
-        const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
-        inputCheckboxElement.addEventListener("change", () => {
-          // 指定したTodoアイテムの完了状態を反転させる
+      const todoListView = new TodoListView();
+      // todoItemsに対応する TodoListViewを作成する
+      const todoListElement = todoListView.createElement(todoItems, {
+        // Todoアイテムが更新イベントが発生したときに呼ばれるリスナー関数
+        onUpdateTodo: ({ id, completed }) => {
           this.todoListModel.updateTodo({
-            id: item.id,
-            completed: !item.completed,
+            id,
+            completed,
           });
-        });
-        // 削除ボタン(x)がクリックされたときにTodoListModelからアイテムを削除する
-        const deleteButtonElement = todoItemElement.querySelector(".delete");
-        deleteButtonElement.addEventListener("click", () => {
+        },
+        // Todoアイテムが削除イベントが発生したときに呼ばれるリスナー関数
+        onDeleteTodo: ({ id }) => {
           this.todoListModel.deleteTodo({
-            id: item.id,
+            id,
           });
-        });
-        todoListElement.appendChild(todoItemElement);
+        },
       });
       // containerElementの中身をtodoListElementで上書きする
       render(todoListElement, containerElement);
