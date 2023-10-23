@@ -25,6 +25,9 @@ jobs:
         run: npm install
       - name: Run test
         run: npm test
+      - name: Install Dependencies todoapp
+        run: npm install
+        working-directory: ./todoapp
       - name: Run test todoapp
         run: npm test
         working-directory: ./todoapp
