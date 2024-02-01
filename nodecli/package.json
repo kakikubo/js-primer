@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^11.1.0",
-    "marked": "11.1"
+    "marked": "11.2"
   },
   "type": "module",
   "devDependencies": {
