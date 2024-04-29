@@ -8,7 +8,7 @@ console.log(multiple(10)); // 20
 
 // 何も返さない関数の場合、undefinedを返す
 function nofn() {
-  return;
+
 }
 console.log(nofn()); // undefined
 
