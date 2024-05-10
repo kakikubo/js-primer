@@ -92,7 +92,7 @@ console.log(numberRegExp.test("123")); // true
 
 //// ラッパーオブジェクト(あえて使わなくていい)
 // 文字列をラップしたStringラッパーオブジェクト
-const str2 = new String("文字列");
+const str2 = String("文字列");
 console.log(str2); // => [String: '文字列']
 // ラッパーオブジェクトはobject型のデータ
 console.log(typeof str2); // => object

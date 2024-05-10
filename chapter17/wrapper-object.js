@@ -4,7 +4,7 @@
 }
 {
   // "input value"の値をラップしたStringのインスタンスを生成
-  const str = new String("input value");
+  const str = String("input value");
   // Stringのインスタンスメソッドである toUpperCase を呼び出す
   str.toUpperCase(); // => "INPUT VALUE"
 }
@@ -20,7 +20,7 @@
   const str = "文字列";
   console.log(typeof str); // => "string"
   // ラッパーオブジェクトはtypeofで調べると"object"となる
-  const stringWrapper = new String("文字列");
+  const stringWrapper = String("文字列");
   console.log(typeof stringWrapper); // => "object"
 }
 {
@@ -30,10 +30,10 @@
   // strへアクセスする際に"string"がラッパーオブジェクトへ変換され、
   // ラッパーオブジェクトはStringのインスタンスなのでメソッドを呼び出せる
   // つまり、上のコードは下のコードと同じ意味となる
-  new String(str).toUpperCase();
+  String(str).toUpperCase();
 }
 {
-  const stringWrapper = new String("文字列だよ");
+  const stringWrapper = String("文字列だよ");
   // プリミティブ型の値を取得する
   console.log(stringWrapper.valueOf()); // => "文字列だよ"
 }
@@ -42,7 +42,7 @@
   // OK: リテラルをつかう
   const str = "文字列";
   // NG: ラッパーオブジェクトを使う
-  const stringWrapper = new String("文字列");
+  const stringWrapper = String("文字列");
 }
 
 // JavaScriptはすべてがオブジェクトである

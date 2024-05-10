@@ -45,7 +45,7 @@
 // プロパティを持たない空のオブジェクトを作成
 // = Objectからインスタンスオブジェクトを作成
 {
-  const obj = new Object();
+  const obj = {};
   console.log(obj); // {}
 }
 
